@@ -1,20 +1,20 @@
 import React from 'react';
 import { take, put, call, fork, select } from 'redux-saga/effects'
-import * as types from './action-types';
 import { loginSuccess, loginFailure } from './actions'
+import { LOGIN_REQUEST } from './action-types';
 
 const loginData = {
-    token: 'my secret token',
+    token: 'ABC',
     user: {
-        name: 'feitico',
-        email: 'user@gmail.com',
+        name: 'Ngoc Dang',
+        email: 'ngocdt@mainjs.net',
     },
 };
 
-const loginCall = function loginCall({email, password}) {
+function loginCall({email, password}) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (email == 'user@gmail.com') {
+            if (email === 'ngocdt@mainjs.net' && password === "123456") {
                 resolve(loginData);
             } else {
                 reject({status: 'wrong email or password'});
@@ -23,21 +23,13 @@ const loginCall = function loginCall({email, password}) {
     })
 };
 
-const watchLoginRequest = function *watchLoginRequest() {
-    while(true) {
-        const { email, password } = yield take('types.LOGIN.REQUEST');
-
+function* watchLoginRequest() {
+    while (true) {
+        const { payload } = yield take(LOGIN_REQUEST);
         try {
-            const payload = {
-                email,
-                password,
-            }
             const response = yield call(loginCall, payload);
-
             yield put(loginSuccess(response));
-            console.log('SAGA LOGIN SUCCESS: ', response);
         } catch (err) {
-            console.log('SAGA LOGIN ERR: ', err);
             yield put(loginFailure(err.status));
         }
     }

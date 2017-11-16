@@ -1,5 +1,7 @@
-import user from './saga';
-
+import userSaga from './saga';
+import * as loginActions from './actions';
+export { userReducer } from './reducer';
 export {
-    user
+    userSaga,
+    loginActions
 }

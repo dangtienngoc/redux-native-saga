@@ -1,30 +1,30 @@
-// import * as types from './actionTypes';
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./action-types";
 
 export function loginRequest(email, password) {
     return {
-        type: 'types.LOGIN.REQUEST',
-        email,
-        password,
+        type: LOGIN_REQUEST,
+        payload: {
+            email, password
+        }
     }
 }
 
-export function loginSuccess({token, user}) {
+export function loginSuccess(payload) {
     return {
-        type: 'types.LOGIN.SUCCESS',
-        token,
-        user,
+        type: LOGIN_SUCCESS,
+        payload
     }
 }
 
 export function loginFailure(err) {
     return {
-        type: 'types.LOGIN.FAILURE',
-        err,
+        type: LOGIN_FAILURE,
+        payload: err
     }
 }
 
 export function logout() {
     return {
-        type: types.LOGOUT,
+        type: LOGOUT
     }
 }

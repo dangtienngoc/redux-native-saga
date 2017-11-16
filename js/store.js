@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
+import logger from 'redux-logger';
 import reducer from './reducers';
 import rootSaga from './sagas';
 
@@ -9,10 +9,14 @@ export default function configureStore() {
     // create the saga middleware
     const sagaMiddleware = createSagaMiddleware();
 
+    const enhancer = compose(
+        applyMiddleware(sagaMiddleware, logger),
+    );
+
     // mount it on the Store
     const store = createStore(
         reducer,
-        applyMiddleware(sagaMiddleware)
+        enhancer
     );
 
     // then run the saga
