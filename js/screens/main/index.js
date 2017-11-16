@@ -5,7 +5,12 @@ export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Main Screen</Text>
+                <Text style={styles.heading}>Main Screen</Text>
+
+                <Button onPress={() => this.props.navigation.navigate('Login')}
+                        title='Login'
+                        style={styles.button}/>
+
                 <Button onPress={() => this.props.navigation.navigate('ResetScreen')}
                         title='Reset Password'
                         style={styles.button}/>
@@ -20,6 +25,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    heading: {
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     button: {
         backgroundColor: '#000000',

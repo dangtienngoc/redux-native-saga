@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./action-types";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, RESET_PASSWORD } from "./action-types";
 
 export function loginRequest(email, password) {
     return {
@@ -26,5 +26,14 @@ export function loginFailure(err) {
 export function logout() {
     return {
         type: LOGOUT
+    }
+}
+
+export function resetPassword(email) {
+    return {
+        type: RESET_PASSWORD,
+        payload: {
+            email
+        }
     }
 }
